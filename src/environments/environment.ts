@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: 'AIzaSyAm-Je1iBjU0lX-CJqLamtsX0xxGoaofB8',
+    authDomain: 'blonation.firebaseapp.com',
+    databaseURL: 'https://blonation.firebaseio.com',
+    projectId: 'blonation',
+    storageBucket: 'blonation.appspot.com',
+    messagingSenderId: '946228958379',
+    appId: '1:946228958379:web:67d29a4bf3e23e9c6113ee'
+  }
 };
 
 /*
