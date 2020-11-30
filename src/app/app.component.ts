@@ -29,7 +29,7 @@ export class AppComponent {
     });
   }
 
-  ionViewWillEnter(){
+  ionViewDidEnter(){
     this.storage.get('logged').then( value => {
       if (value !== null){
         this.logged = true;
