@@ -4,6 +4,7 @@ import {AuthService} from '../services/auth.service';
 import {LoadingController, NavController} from '@ionic/angular';
 import {User} from '../model/user';
 import firebase from 'firebase';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-register',
@@ -42,6 +43,7 @@ export class RegisterPage implements OnInit {
       private auth: AuthService,
       private formBuilder: FormBuilder,
       private loading: LoadingController,
+      private storage: Storage,
   ) { }
 
   ngOnInit() {
@@ -83,7 +85,6 @@ export class RegisterPage implements OnInit {
   tryRegister(value){
     this.auth.registerUser(value).then(
         res => {
-          console.log(res);
           this.errorMessage = '';
           this.auth.userUid().subscribe(resa => {
             if (resa !== null){
@@ -100,6 +101,8 @@ export class RegisterPage implements OnInit {
                 weight: value.weight
               };
               this.auth.create(this.newU);
+              this.storage.set('logged', true);
+              this.storage.set('logged', false);
               this.nav.navigateForward('/profile');
             }
           });

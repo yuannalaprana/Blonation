@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {NavController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginPage implements OnInit {
 
   constructor(private nav: NavController,
               private auth: AuthService,
+              private storage: Storage,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -44,11 +46,19 @@ export class LoginPage implements OnInit {
         res => {
           console.log(res);
           this.errorMessage = '';
-          this.nav.navigateForward('/profile');
+          this.storage.set('logged', true);
+          if (value.email === 'admin@blonation.com'){
+            this.storage.set('admin', true);
+            this.nav.navigateForward('/home-admin');
+          }else {
+            this.storage.set('admin', false);
+            this.nav.navigateForward('/profile');
+          }
         }, err => {
           console.log(err);
           this.errorMessage = err.message;
         });
+
   }
 
   goToRegisterPage(){

@@ -31,6 +31,14 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'add-event',
+    loadChildren: () => import('./admin/add-event/add-event.module').then( m => m.AddEventPageModule)
+  },
+  {
+    path: 'add-location',
+    loadChildren: () => import('./admin/add-location/add-location.module').then( m => m.AddLocationPageModule)
+  },
 ];
 
 @NgModule({
