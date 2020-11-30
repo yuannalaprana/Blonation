@@ -29,7 +29,7 @@ export class AppComponent {
     });
   }
 
-  ngOnInit (){
+  ionViewWillEnter(){
     this.storage.get('logged').then( value => {
       if (value !== null){
         this.logged = true;
