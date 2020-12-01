@@ -50,7 +50,6 @@ export class LoginPage implements OnInit {
           console.log(res);
           this.logged = true;
           if (this.logged) {
-            console.log('if1');
             if (value.email === 'admin@blonation.com') {
               this.storage.set('logged', 11);
               console.log('aaaa');
@@ -58,15 +57,13 @@ export class LoginPage implements OnInit {
             } else {
               this.storage.set('logged', 1);
               console.log('bukan admin');
-              this.nav.navigateForward('/menu/profile');
+              // this.nav.navigateForward('/menu/profile');
             }
           }
         }, err => {
           console.log(err);
           this.errorMessage = err.message;
         });
-
-
 
   }
   async presentLoadingDefault() {
@@ -86,9 +83,6 @@ export class LoginPage implements OnInit {
     this.nav.navigateForward('/register');
   }
 
-  setData(value){
-
-  }
 
 
 

@@ -1,5 +1,7 @@
 export class Event{
-    idEvent: string;
+    keyEvent: string;
     nameEvent: string;
-    idLocation: string;
+    keyLocation: string;
+    constructor(keyEvent: string, nameEvent: string, keyLocation: string) {
+    }
 }

@@ -40,7 +40,6 @@ export class ProfilePage implements OnInit {
     this.auth.logoutUser().then( res => {
       console.log('res: ', res);
       this.storage.remove('logged');
-      this.storage.remove('admin');
       this.nav.navigateBack('/home');
     }).catch(error => {
       console.log(error);
