@@ -14,15 +14,19 @@
         <ion-label position="floating" color="primary">Event Name</ion-label>
         <ion-input type="text" ngModel name="nameEvent"></ion-input>
       </ion-item>
+      <ion-item style="margin-top: 20px">
+        <ion-label color="primary">Event Date</ion-label>
+        <ion-datetime ngModel name="dateEvent" max="2021-12-31" min="2020-11" ></ion-datetime>
+      </ion-item>
       <ion-item>
-        <ion-label position="floating" color="primary">location</ion-label>
+        <ion-label position="floating" color="primary">Location</ion-label>
         <ion-select ngModel name="keyLocation" interface="action-sheet">
           <ion-select-option *ngFor="let l of location" [value]="l.key">{{l.nameLocation}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
     <div class="row">
-      <div class="column" style="text-align: center">
+      <div class="column" style="text-align: center; margin-top: 25px">
         <ion-button class="submit-btn" style="width: 90%" type="submit" shape="round" >Add Event</ion-button>
       </div>
     </div>
