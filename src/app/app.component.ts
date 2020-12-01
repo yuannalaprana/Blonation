@@ -29,20 +29,5 @@ export class AppComponent {
     });
   }
 
-  ionViewDidEnter(){
-    this.storage.get('logged').then( value => {
-      if (value !== null){
-        this.logged = true;
-        this.storage.get('admin').then( value1 => {
-          if (value1 !== null){
-            if (value1 === true){
-              this.admin = true;
-            }else {
-              this.admin = false;
-            }
-          }
-        });
-      }
-    });
-  }
+
 }

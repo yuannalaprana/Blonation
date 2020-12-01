@@ -1,67 +1,67 @@
 <ion-app>
-  <ion-menu side="start"  menuId="user">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle menu="user" *ngIf="!logged">
-          <ion-item lines="none" routerLink="/home">
-            <ion-icon name="home" slot="start"></ion-icon>
-            <ion-label>Home</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user" *ngIf="logged && admin">
-          <ion-item lines="none" routerLink="/home-admin">
-            <ion-icon name="person" slot="start"></ion-icon>
-            <ion-label>Admin Panel</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user">
-          <ion-item lines="none" routerLink="/schedule">
-            <ion-icon name="people" slot="start"></ion-icon>
-            <ion-label>Schedule</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user" *ngIf="!logged" >
-          <ion-item lines="none" routerLink="/login">
-            <ion-icon name="log-in" slot="start"></ion-icon>
-            <ion-label>Login</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user" *ngIf="logged && !admin">
-          <ion-item lines="none" routerLink="/profile">
-            <ion-icon name="person" slot="start"></ion-icon>
-            <ion-label>Profile</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user" *ngIf="logged && admin">
-          <ion-item lines="none" routerLink="/add-event">
-            <ion-icon name="calendar" slot="start"></ion-icon>
-            <ion-label>Add Event</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle menu="user" *ngIf="logged && admin">
-          <ion-item lines="none" routerLink="/add-location">
-            <ion-icon name="location" slot="start"></ion-icon>
-            <ion-label>Add Location</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+<!--  <ion-menu side="start"  menuId="user">-->
+<!--    <ion-header>-->
+<!--      <ion-toolbar>-->
+<!--        <ion-title>Menu</ion-title>-->
+<!--      </ion-toolbar>-->
+<!--    </ion-header>-->
+<!--    <ion-content>-->
+<!--      <ion-list>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="!logged">-->
+<!--          <ion-item lines="none" routerLink="/home">-->
+<!--            <ion-icon name="home" slot="start"></ion-icon>-->
+<!--            <ion-label>Home</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="logged && admin">-->
+<!--          <ion-item lines="none" routerLink="/home-admin">-->
+<!--            <ion-icon name="person" slot="start"></ion-icon>-->
+<!--            <ion-label>Admin Panel</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user">-->
+<!--          <ion-item lines="none" routerLink="/schedule">-->
+<!--            <ion-icon name="people" slot="start"></ion-icon>-->
+<!--            <ion-label>Schedule</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="!logged" >-->
+<!--          <ion-item lines="none" routerLink="/login">-->
+<!--            <ion-icon name="log-in" slot="start"></ion-icon>-->
+<!--            <ion-label>Login</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="logged && !admin">-->
+<!--          <ion-item lines="none" routerLink="/profile">-->
+<!--            <ion-icon name="person" slot="start"></ion-icon>-->
+<!--            <ion-label>Profile</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="logged && admin">-->
+<!--          <ion-item lines="none" routerLink="/add-event">-->
+<!--            <ion-icon name="calendar" slot="start"></ion-icon>-->
+<!--            <ion-label>Add Event</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--        <ion-menu-toggle menu="user" *ngIf="logged && admin">-->
+<!--          <ion-item lines="none" routerLink="/add-location">-->
+<!--            <ion-icon name="location" slot="start"></ion-icon>-->
+<!--            <ion-label>Add Location</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
 
-      </ion-list>
-    </ion-content>
+<!--      </ion-list>-->
+<!--    </ion-content>-->
 
-    <ion-footer>
-      <ion-list >
-        <ion-menu-toggle menu="user">
-          <ion-item lines="none" routerLink="">
-            <ion-label>Exit</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-    </ion-footer>
-  </ion-menu>
-  <ion-router-outlet main></ion-router-outlet>
+<!--    <ion-footer>-->
+<!--      <ion-list >-->
+<!--        <ion-menu-toggle menu="user">-->
+<!--          <ion-item lines="none" routerLink="">-->
+<!--            <ion-label>Exit</ion-label>-->
+<!--          </ion-item>-->
+<!--        </ion-menu-toggle>-->
+<!--      </ion-list>-->
+<!--    </ion-footer>-->
+<!--  </ion-menu>-->
+  <ion-router-outlet></ion-router-outlet>
 </ion-app>
