@@ -17,6 +17,10 @@ export class EventSrvcService {
     return this.eventRef;
   }
 
+  // get(key): AngularFireList<Event>{
+  //
+  // }
+
   create(event: Event): any{
     return this.eventRef.push(event);
   }

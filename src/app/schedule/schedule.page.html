@@ -11,16 +11,14 @@
 <ion-content>
   <ion-list>
 
-      <ion-item *ngFor="let e of event">
-        <ion-row>
-          <ion-label >
-            {{ e.nameEvent }} <br>
-            <ion-note>{{e.dateEvent | date}}</ion-note>
-          </ion-label>
-
-<!--          <ion-datetime displayFormat="DDD, DD MMM YYYY" [value]="e.dateEvent"></ion-datetime>-->
-        </ion-row>
-      </ion-item>
+    <ion-item *ngFor="let e of event" [routerLink]="['detail/',e.key]">
+      <ion-row>
+        <ion-label >
+          {{ e.nameEvent }} <br>
+          <ion-note>{{e.dateEvent | date}}</ion-note>
+        </ion-label>
+      </ion-row>
+    </ion-item>
 
   </ion-list>
 
