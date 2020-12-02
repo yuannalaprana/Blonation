@@ -9,5 +9,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+
+      <ion-item *ngFor="let e of event">
+        <ion-row>
+          <ion-label >
+            {{ e.nameEvent }}
+            <ion-datetime slot="end" displayFormat="DDD, DD MMM YYYY" [value]="e.dateEvent"></ion-datetime>
+          </ion-label>
+        </ion-row>
+      </ion-item>
+
+  </ion-list>
 
 </ion-content>
