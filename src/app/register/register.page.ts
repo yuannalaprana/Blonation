@@ -98,7 +98,9 @@ export class RegisterPage implements OnInit {
                 address: value.address,
                 phone: value.phone,
                 height: value.height,
-                weight: value.weight
+                weight: value.weight,
+                lastDonateDate: '',
+                donated: 'false',
               };
               this.auth.create(this.newU);
               this.storage.set('logged', true);

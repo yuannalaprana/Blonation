@@ -12,6 +12,7 @@ import {EventSrvcService} from '../../services/event-srvc.service';
 export class HomeAdminPage implements OnInit {
   location: any;
   event: any;
+  temp: any;
 
   type: string;
   constructor(
@@ -26,6 +27,12 @@ export class HomeAdminPage implements OnInit {
             changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
     ).subscribe( data => {
       this.location = data;
+      // console.log(this.location);
+      for (const abc of this.location){
+        abc.idloc = abc.key;
+        delete abc.key;
+        // console.log(abc);
+      }
     });
 
     this.eventSrvc.getAll().snapshotChanges().pipe(
@@ -33,7 +40,20 @@ export class HomeAdminPage implements OnInit {
             changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
     ).subscribe( data => {
       this.event = data;
+      for (const abc of this.event){
+        for (const keyloc of this.location){
+          if (abc.keyLocation === keyloc.idloc){
+            this.temp = abc;
+            this.temp.addressLocation = keyloc.addressLocation;
+            this.temp.cordinate = keyloc.cordinate;
+            this.temp.nameLocation = keyloc.nameLocation;
+            console.log(this.temp);
+          }
+        }
+      }
     });
+
+    //
   }
 
   onFilterUpdate(event: CustomEvent){

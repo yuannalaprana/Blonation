@@ -8,6 +8,8 @@ export class User {
     phone: string;
     height: number;
     weight: number;
+    donated: string;
+    lastDonateDate: string;
     // constructor(nameFull: string, email: string, nama: string, prodi: string) {
     // }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {User} from '../model/user';
+import {Event} from '../model/event';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class AuthService {
           err => reject(err)
       );
     });
+  }
+
+  getAll(): AngularFireList<User> {
+    return this.ref;
   }
 
   loginUser(value){
@@ -51,8 +56,16 @@ export class AuthService {
     return this.fireAuth.user;
   }
 
+  update(key: string, value: any): any{
+    return this.ref.update(key, value);
+  }
+
   // database
   create(user: User): any{
     return this.ref.push(user);
+  }
+
+  userDetails() {
+    return this.fireAuth.user;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, RouterEvent} from '@angular/router';
 import {Storage} from '@ionic/storage';
 import {NavController} from '@ionic/angular';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,7 @@ import {NavController} from '@ionic/angular';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-
+  temp: any;
   activePath = '';
   logged: boolean;
   admin: boolean;
@@ -36,26 +37,6 @@ export class MenuPage implements OnInit {
       name: 'Register',
       path: '/menu/register',
       icon: 'pencil'
-    },
-    {
-      name: 'Profile',
-      path: '/menu/profile',
-      icon: 'person'
-    },
-    {
-      name: 'Home Admin',
-      path: '/menu/home-admin',
-      icon: 'home'
-    },
-    {
-      name: 'Add event',
-      path: '/menu/add-event',
-      icon: 'calendar'
-    },
-    {
-      name: 'Add location',
-      path: '/menu/add-location',
-      icon: 'location'
     },
   ];
 
@@ -95,34 +76,41 @@ export class MenuPage implements OnInit {
     },
   ];
 
-  constructor(private router: Router, private storage: Storage, private navCtrl: NavController) {
+  constructor(
+      private router: Router,
+      private storage: Storage,
+      private nav: NavController,
+      private auth: AuthService,
+  ) {
     this.router.events.subscribe((event: RouterEvent) => {
       if (event !== null){
         this.activePath = event.url;
       }
+      this.getLogin();
+      // console.log('test');
     });
   }
 
-  // ngOnInit(){
-  //   this.getLogin();
-  //   console.log('test2');
-  // }
+  ngOnInit(){
+    // this.getLogin();
+  }
+
+  ionViewWillEnter(){
+    this.getLogin();
+  }
 
   async getLogin(){
-    await this.storage.get('logged').then( value => {
-      console.log(value);
+    this.storage.get('logged')
+        .then( value => {
       if (value !== null){
         if (value === 11){
           this.pages = this.pagesAdmin;
-          console.log(this.pages);
         }else {
           this.pages = this.pagesUser;
-          console.log('test3');
         }
-        console.log('logged true');
+        this.logged = true;
       }else if (value === null) {
           this.pages = this.pagesNotLogin;
-          console.log('logged false');
       }
     });
 
@@ -133,13 +121,14 @@ export class MenuPage implements OnInit {
     // });
   }
 
-  ngOnInit(){
-    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
-    // this.getLogin();
-    this.pages = this.pagesNotLogin;
-    console.log('masuk menu');
+  logout(){
+    this.auth.logoutUser().then( res => {
+      console.log('res: ', res);
+      this.storage.remove('logged');
+      this.nav.navigateBack('/home');
+    }).catch(error => {
+      console.log(error);
+    });
   }
-
-
 
 }

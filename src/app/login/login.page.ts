@@ -28,7 +28,8 @@ export class LoginPage implements OnInit {
               private auth: AuthService,
               private storage: Storage,
               private formBuilder: FormBuilder,
-              public loadingCtrl: LoadingController) { }
+              public loadingCtrl: LoadingController,
+              ) { }
 
   ngOnInit() {
     this.validationForm = this.formBuilder.group({
@@ -54,10 +55,11 @@ export class LoginPage implements OnInit {
               this.storage.set('logged', 11);
               console.log('aaaa');
               this.nav.navigateForward('/menu/home-admin');
+
             } else {
               this.storage.set('logged', 1);
               console.log('bukan admin');
-              // this.nav.navigateForward('/menu/profile');
+              this.nav.navigateForward('/menu/home');
             }
           }
         }, err => {
