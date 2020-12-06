@@ -72,33 +72,33 @@ export class HomeAdminPage implements OnInit {
     ).subscribe( data => {
       this.applicant = data;
       for (const abc of this.applicant){
-        for (const event of this.event){
-          if (abc.idEvent === event.key){
-            this.tempApplicant = abc;
-            this.tempApplicant.nameEvent = event.nameEvent;
+          for (const event of this.event) {
+            if (abc.idEvent === event.key) {
+              this.tempApplicant = abc;
+              this.tempApplicant.nameEvent = event.nameEvent;
+            }
           }
-        }
-        for (const user of this.user){
-          console.log(user.key);
-          console.log(abc.idUser);
-          if (abc.idUser === user.key){
-            this.tempApplicant.nameUser = user.nameFull;
-            // this.tempApplicant.golonganDarah = user.bloodtype;
-            if (user.bloodtype === '1'){
-              this.tempApplicant.golonganDarah = 'A';
+          for (const user of this.user) {
+            console.log(user.key);
+            console.log(abc.idUser);
+            if (abc.idUser === user.key) {
+              this.tempApplicant.nameUser = user.nameFull;
+              // this.tempApplicant.golonganDarah = user.bloodtype;
+              if (user.bloodtype === '1') {
+                this.tempApplicant.golonganDarah = 'A';
+              }
+              if (user.bloodtype === '2') {
+                this.tempApplicant.golonganDarah = 'B';
+              }
+              if (user.bloodtype === '3') {
+                this.tempApplicant.golonganDarah = 'AB';
+              }
+              if (user.bloodtype === '4') {
+                this.tempApplicant.golonganDarah = 'O';
+              }
+              console.log(this.tempApplicant);
             }
-            if (user.bloodtype === '2'){
-              this.tempApplicant.golonganDarah = 'B';
-            }
-            if (user.bloodtype === '3'){
-              this.tempApplicant.golonganDarah = 'AB';
-            }
-            if (user.bloodtype === '4'){
-              this.tempApplicant.golonganDarah = 'O';
-            }
-            console.log(this.tempApplicant);
           }
-        }
       }
 
 
@@ -117,6 +117,16 @@ export class HomeAdminPage implements OnInit {
   }
 
   decline(slidingItem: IonItemSliding){
+    slidingItem.close();
+    console.log('Not Accpted');
+  }
+
+  accAplicant( slidingItem: IonItemSliding){
+    slidingItem.close();
+    console.log('Accepted');
+  }
+
+  declineAplicant(slidingItem: IonItemSliding){
     slidingItem.close();
     console.log('Not Accpted');
   }
