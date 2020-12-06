@@ -181,7 +181,7 @@ export class ScheduleDetailPage implements OnInit {
 
         if (this.sentAppointment){
           this.appointmen = new Appointments();
-          this.appointmen.idUser = this.userid;
+          this.appointmen.idUser = this.user.key;
           this.appointmen.idEvent = this.temp[0].key;
           this.appointmen.status = false;
           console.log(this.appointmen);

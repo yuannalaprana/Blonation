@@ -64,7 +64,6 @@ export class HomeAdminPage implements OnInit {
             changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
     ).subscribe( data1 => {
       this.user = data1;
-      console.log(this.user);
     });
 
     this.appointmentSrvc.getAll().snapshotChanges().pipe(
@@ -72,8 +71,6 @@ export class HomeAdminPage implements OnInit {
             changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
     ).subscribe( data => {
       this.applicant = data;
-      console.log(this.applicant);
-      console.log(this.event);
       for (const abc of this.applicant){
         for (const event of this.event){
           if (abc.idEvent === event.key){
@@ -82,13 +79,28 @@ export class HomeAdminPage implements OnInit {
           }
         }
         for (const user of this.user){
+          console.log(user.key);
+          console.log(abc.idUser);
           if (abc.idUser === user.key){
             this.tempApplicant.nameUser = user.nameFull;
+            // this.tempApplicant.golonganDarah = user.bloodtype;
+            if (user.bloodtype === '1'){
+              this.tempApplicant.golonganDarah = 'A';
+            }
+            if (user.bloodtype === '2'){
+              this.tempApplicant.golonganDarah = 'B';
+            }
+            if (user.bloodtype === '3'){
+              this.tempApplicant.golonganDarah = 'AB';
+            }
+            if (user.bloodtype === '4'){
+              this.tempApplicant.golonganDarah = 'O';
+            }
             console.log(this.tempApplicant);
           }
         }
       }
-      console.log(this.tempApplicant);
+
 
     });
 
