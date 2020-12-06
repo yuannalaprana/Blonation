@@ -20,7 +20,7 @@
 
     <ion-footer>
       <ion-list>
-        <ion-menu-toggle *ngIf="logged">
+        <ion-menu-toggle [hidden]="!logged">
           <ion-item lines="none" (click)="logout()">
             <ion-label>Log Out</ion-label>
           </ion-item>
