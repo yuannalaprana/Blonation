@@ -110,7 +110,8 @@ export class MenuPage implements OnInit {
         }
         this.logged = true;
       }else if (value === null) {
-          this.pages = this.pagesNotLogin;
+        this.pages = this.pagesNotLogin;
+        this.logged = false;
       }
     });
 

@@ -82,13 +82,14 @@ export class RegisterPage implements OnInit {
   }
 
   tryRegister(value){
-    this.auth.registerUser(value).then(
+    this.auth.registerUser(value).then( // register Authentication
         res => {
           this.errorMessage = '';
-          this.auth.userUid().subscribe(resa => {
+          this.auth.userUid().subscribe(resa => { // realtime database
             if (resa !== null){
               // console.log('uid: ', resa.uid);
               this.newU = {
+                key: '',
                 uid: resa.uid,
                 nameFull: value.name,
                 email: value.email,
@@ -103,7 +104,7 @@ export class RegisterPage implements OnInit {
               };
               this.auth.create(this.newU);
               this.storage.set('logged', 1);
-              this.nav.navigateForward('/profile');
+              this.nav.navigateForward('/menu/home');
             }
           });
           }, err => {
@@ -113,15 +114,8 @@ export class RegisterPage implements OnInit {
         }
     );
 
-    //
   }
-
   goLoginPage(){
-
-    // this.nav.navigateBack('/login');
+    this.nav.navigateForward('/menu/login');
   }
-  test(){
-    this.auth.logoutUser();
-  }
-
 }

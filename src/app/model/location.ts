@@ -1,5 +1,5 @@
 export class Location{
-    keyLocation: string;
+    key: string;
     nameLocation: string;
     addressLocation: string;
     cordinate: string;

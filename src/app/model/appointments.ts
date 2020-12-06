@@ -1,5 +1,5 @@
 export class Appointments {
-    idAppointmen: string;
+    key: string;
     idUser: string;
     idEvent: string;
     status: boolean;

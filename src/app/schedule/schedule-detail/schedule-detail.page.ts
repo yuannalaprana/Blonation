@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EventSrvcService} from '../../services/event-srvc.service';
 import {map} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,7 +11,7 @@ import auth = firebase.auth;
 import {AppointmentSrvcService} from '../../services/appointment-srvc.service';
 import {ToastController} from '@ionic/angular';
 
-declare var goggle: any;
+declare var google: any;
 
 @Component({
   selector: 'app-schedule-detail',
@@ -43,7 +43,11 @@ export class ScheduleDetailPage implements OnInit {
 
   // map
   map: any;
+  @ViewChild('map', {read: ElementRef, static: false}) mapRef: ElementRef;
   distance: any;
+  posNow: any;
+  coorPlace: any;
+
 
 
   constructor(
@@ -71,12 +75,8 @@ export class ScheduleDetailPage implements OnInit {
 
     this.date = new Date().toISOString();
     setTimeout(() => {
-    }, 1000);
+    }, 3000);
 
-
-  }
-
-  ionViewWillEnter(){
     this.activRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('id')){ return; }
       this.key = paramMap.get('id');
@@ -107,8 +107,22 @@ export class ScheduleDetailPage implements OnInit {
                 this.temp.nameLocation = keyloc.nameLocation;
                 this.temp = [].concat(this.temp);
                 console.log(this.temp[0].cordinate);
-                const coord = this.temp[0].cordinate.split(', ');
-                console.log(coord);
+                this.coorPlace = this.temp[0].cordinate.split(', ');
+
+                // map
+                // this.showMap(this.coorPlace);
+
+                // get km
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition((position) => {
+                    this.posNow = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                    };
+                    this.distance = this.getDistance(this.coorPlace[0], this.coorPlace[1], this.posNow.lat, this.posNow.lng);
+                    console.log(this.distance);
+                  });
+                }
               }
             }
           }
@@ -132,13 +146,13 @@ export class ScheduleDetailPage implements OnInit {
     this.storage.get('logged').then( value => {
       if (value !== null) {
         this.logged = true;
+        console.log(this.logged);
       } else if (value === null) {
       }
     });
 
 
   }
-
 
   apply(){
     if (this.user.donated === 'true'){
@@ -216,6 +230,22 @@ export class ScheduleDetailPage implements OnInit {
 
   convert(deg) {
     return deg * (Math.PI / 180);
+  }
+
+  showMap(pos: any){
+    const location = new google.maps.LatLng(pos[0], pos[1]);
+    const options = {
+      center: location,
+      zoom: 13,
+      disableDefaultUI: true
+    };
+    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+    // The marker, positioned at UMN
+    const marker = new google.maps.Marker({
+      position: pos,
+      map: this.map,
+    });
   }
 
 }

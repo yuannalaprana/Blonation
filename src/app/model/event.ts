@@ -1,5 +1,5 @@
 export class Event{
-    keyEvent: string;
+    key: string;
     nameEvent: string;
     dateEvent: string;
     keyLocation: string;
