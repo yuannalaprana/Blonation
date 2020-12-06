@@ -89,7 +89,6 @@ export class RegisterPage implements OnInit {
             if (resa !== null){
               // console.log('uid: ', resa.uid);
               this.newU = {
-                key: '',
                 uid: resa.uid,
                 nameFull: value.name,
                 email: value.email,

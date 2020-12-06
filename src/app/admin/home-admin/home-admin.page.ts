@@ -3,6 +3,9 @@ import {IonItemSliding} from '@ionic/angular';
 import {LoactionSrvcService} from '../../services/loaction-srvc.service';
 import {map} from 'rxjs/operators';
 import {EventSrvcService} from '../../services/event-srvc.service';
+import {AppointmentSrvcService} from '../../services/appointment-srvc.service';
+import {AuthService} from '../../services/auth.service';
+import {attachView} from '@ionic/angular/providers/angular-delegate';
 
 @Component({
   selector: 'app-home-admin',
@@ -12,12 +15,17 @@ import {EventSrvcService} from '../../services/event-srvc.service';
 export class HomeAdminPage implements OnInit {
   location: any;
   event: any;
+  applicant: any;
+  tempApplicant: any;
+  user: any;
   temp: any;
 
   type: string;
   constructor(
       private locSrvc: LoactionSrvcService,
       private eventSrvc: EventSrvcService,
+      private appointmentSrvc: AppointmentSrvcService,
+      private auths: AuthService,
   ) { }
 
   ngOnInit() {
@@ -47,10 +55,41 @@ export class HomeAdminPage implements OnInit {
             this.temp.addressLocation = keyloc.addressLocation;
             this.temp.cordinate = keyloc.cordinate;
             this.temp.nameLocation = keyloc.nameLocation;
-            console.log(this.temp);
           }
         }
       }
+    });
+    this.auths.getAll().snapshotChanges().pipe(
+        map(changes =>
+            changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+    ).subscribe( data1 => {
+      this.user = data1;
+      console.log(this.user);
+    });
+
+    this.appointmentSrvc.getAll().snapshotChanges().pipe(
+        map(changes =>
+            changes.map(c => ({key: c.payload.key, ...c.payload.val()})))
+    ).subscribe( data => {
+      this.applicant = data;
+      console.log(this.applicant);
+      console.log(this.event);
+      for (const abc of this.applicant){
+        for (const event of this.event){
+          if (abc.idEvent === event.key){
+            this.tempApplicant = abc;
+            this.tempApplicant.nameEvent = event.nameEvent;
+          }
+        }
+        for (const user of this.user){
+          if (abc.idUser === user.key){
+            this.tempApplicant.nameUser = user.nameFull;
+            console.log(this.tempApplicant);
+          }
+        }
+      }
+      console.log(this.tempApplicant);
+
     });
 
     //
