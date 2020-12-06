@@ -53,12 +53,11 @@ export class LoginPage implements OnInit {
           if (this.logged) {
             if (value.email === 'admin@blonation.com') {
               this.storage.set('logged', 11);
-              console.log('aaaa');
               this.nav.navigateForward('/menu/home-admin');
 
             } else {
               this.storage.set('logged', 1);
-              console.log('bukan admin');
+              // console.log('bukan admin');
               this.nav.navigateForward('/menu/home');
             }
           }
@@ -67,22 +66,6 @@ export class LoginPage implements OnInit {
           this.errorMessage = err.message;
         });
 
-  }
-  async presentLoadingDefault() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Please wait...',
-      duration: 10000
-    });
-
-    await loading.present();
-
-    // setTimeout(() => {
-    //   loading.dismiss();
-    // }, 5000);
-  }
-
-  goToRegisterPage(){
-    this.nav.navigateForward('/register');
   }
 
 

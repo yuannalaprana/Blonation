@@ -15,7 +15,6 @@ export class RegisterPage implements OnInit {
   validationForm: FormGroup;
   errorMessage: string;
   email: any = [];
-  toDb: any = [];
   newU: User;
 
   validationMessages = {
@@ -103,8 +102,7 @@ export class RegisterPage implements OnInit {
                 donated: 'false',
               };
               this.auth.create(this.newU);
-              this.storage.set('logged', true);
-              this.storage.set('logged', false);
+              this.storage.set('logged', 1);
               this.nav.navigateForward('/profile');
             }
           });

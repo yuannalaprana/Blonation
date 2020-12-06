@@ -11,6 +11,8 @@ import auth = firebase.auth;
 import {AppointmentSrvcService} from '../../services/appointment-srvc.service';
 import {ToastController} from '@ionic/angular';
 
+declare var goggle: any;
+
 @Component({
   selector: 'app-schedule-detail',
   templateUrl: './schedule-detail.page.html',
@@ -39,6 +41,10 @@ export class ScheduleDetailPage implements OnInit {
   massageToast: string;
   colorToast = 'danger';
 
+  // map
+  map: any;
+  distance: any;
+
 
   constructor(
       private eventSrvc: EventSrvcService,
@@ -66,6 +72,8 @@ export class ScheduleDetailPage implements OnInit {
     this.date = new Date().toISOString();
     setTimeout(() => {
     }, 1000);
+
+
   }
 
   ionViewWillEnter(){
@@ -98,7 +106,9 @@ export class ScheduleDetailPage implements OnInit {
                 this.temp.cordinate = keyloc.cordinate;
                 this.temp.nameLocation = keyloc.nameLocation;
                 this.temp = [].concat(this.temp);
-                // console.log(this.temp);
+                console.log(this.temp[0].cordinate);
+                const coord = this.temp[0].cordinate.split(', ');
+                console.log(coord);
               }
             }
           }
@@ -125,6 +135,8 @@ export class ScheduleDetailPage implements OnInit {
       } else if (value === null) {
       }
     });
+
+
   }
 
 
@@ -187,6 +199,23 @@ export class ScheduleDetailPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = this.convert(lat2 - lat1);
+    const dLon = this.convert(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.convert(lat1)) * Math.cos(this.convert(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // Distance in km
+    return d;
+  }
+
+  convert(deg) {
+    return deg * (Math.PI / 180);
   }
 
 }
